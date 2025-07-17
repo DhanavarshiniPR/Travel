@@ -99,15 +99,9 @@ export default function AdminHome() {
             <Link href="/blog">View All Blogs</Link>
           </div>
           <br />
-          <a
-            href="#"
-            onClick={() => {
-              localStorage.clear();
-              window.location.href = '/loginn';
-            }}
-          >
+          <Link href="/">
             Logout
-          </a>
+          </Link>
         </div>
       </div>
 

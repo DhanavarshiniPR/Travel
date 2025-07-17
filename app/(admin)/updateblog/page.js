@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import travelBlogs from '../../lib/traveldata';
+import Image from 'next/image';
 
 export default function UpdateBlog() {
   const [blogs, setBlogs] = useState([]);
@@ -128,10 +129,10 @@ export default function UpdateBlog() {
             />
 
             {preview && (
-              <img
+              <Image
                 src={preview}
                 alt="Preview"
-                style={{ width: '100%', borderRadius: '10px', marginBottom: '16px' }}
+                className="preview-image"
               />
             )}
 
@@ -233,7 +234,7 @@ export default function UpdateBlog() {
     margin-bottom: 12px;
   }
 
-  img {
+  .preview-image {
     width: 100%;
     border-radius: 10px;
     margin-bottom: 16px;

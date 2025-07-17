@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import travelBlogs from '../../lib/traveldata'; 
 
 export default function CreateBlog() {
@@ -98,7 +99,7 @@ export default function CreateBlog() {
 
           <input type="file" accept="image/*" onChange={handleImageChange} />
           {preview && (
-            <img src={preview} alt="Preview" className="preview-image" />
+            <Image src={preview} alt="Preview" className="preview-image" />
           )}
 
           <button type="submit">Create</button>
