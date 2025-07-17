@@ -1,15 +1,19 @@
 "use client";
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const UserSetting = () => {
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const role = localStorage.getItem('role');
-    if (!isLoggedIn || role !== 'user') {
-      window.location.href = '/loginn';
-    }
-  }, []);
+ const router = useRouter();
+
+useEffect(() => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  const role = localStorage.getItem('role');
+  if (!isLoggedIn || role !== 'user') {
+    router.push('/loginn');
+  }
+}, []);
+
 
   return (
     <div className="container">

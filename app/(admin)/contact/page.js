@@ -23,7 +23,7 @@ export default function ContactPage() {
       <div className="container">
         <h1> Contact Us</h1>
        <p className="intro">
-  Have questions, feedback, or collaboration ideas? We&apos;d love to hear from you!
+  Have questions, feedback, or collaboration ideas? We had love to hear from you!
 </p>
 
 
