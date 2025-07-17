@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -25,7 +25,7 @@ export default function TravelBlogs() {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          <h1 className="nav-title">Travel Tales</h1>
+          <h1 className="nav-title">~~Travel Tales~~</h1>
           <div className="nav-links">
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/about" className="nav-link">About</Link>
@@ -59,7 +59,7 @@ export default function TravelBlogs() {
 
       <style jsx>{`
   .navbar {
-    background: linear-gradient(to right, #a5b4fc, #c7d2fe);
+    background: linear-gradient(to right, #d1d5db, #e5e7eb);
     padding: 16px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   }
@@ -76,7 +76,7 @@ export default function TravelBlogs() {
   .nav-title {
     font-size: 28px;
     font-weight: 800;
-    color: #1f2937;
+    color: #111827;
   }
 
   .nav-links {
@@ -86,7 +86,7 @@ export default function TravelBlogs() {
 
   .nav-link {
     font-weight: 600;
-    color: #1f2937;
+    color: #111827;
     text-decoration: none;
     padding: 8px 14px;
     border-radius: 6px;
@@ -94,13 +94,13 @@ export default function TravelBlogs() {
   }
 
   .nav-link:hover {
-    background: #4f46e5;
-    color: #fff;
+    background: #e2e8f0;
+    color: #111827;
   }
 
   .logout-button {
-    background-color: #ef4444;
-    color: white;
+    background-color: #fca5a5;
+    color: #111827;
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
@@ -110,7 +110,7 @@ export default function TravelBlogs() {
   }
 
   .logout-button:hover {
-    background-color: #dc2626;
+    background-color: #f87171;
   }
 
   .home-container {

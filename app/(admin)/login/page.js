@@ -1,6 +1,5 @@
-'use client';
+"use client";
 import { useState } from 'react';
-import '../../globals.css';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -51,15 +50,16 @@ export default function AdminLogin() {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #cccbfa;
+          background-color: #e9ecef;
+          padding: 0 20px;
         }
 
         .container {
-          background-color: #dcdffc;
+          background-color: #ffffff;
           padding: 40px 30px;
-          border: 1px solid black;
-          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-          width: 90%;
+          border: 1px solid #dee2e6;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+          width: 100%;
           max-width: 400px;
           text-align: center;
           border-radius: 12px;
@@ -67,6 +67,8 @@ export default function AdminLogin() {
 
         .container h2 {
           margin-bottom: 20px;
+          font-size: 1.8rem;
+          color: #343a40;
         }
 
         input[type="text"],
@@ -74,7 +76,7 @@ export default function AdminLogin() {
           width: 100%;
           padding: 12px 14px;
           margin-bottom: 18px;
-          border: 1px solid #0f0f0f;
+          border: 1px solid #ced4da;
           border-radius: 8px;
           font-size: 15px;
           transition: border-color 0.2s ease;
@@ -82,25 +84,26 @@ export default function AdminLogin() {
 
         input:focus {
           outline: none;
-          border-color: #030303;
-          box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
+          border-color: #80bdff;
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
         }
 
         button {
           padding: 12px 24px;
           font-size: 16px;
           font-weight: 500;
-          background-color: #b2b2e6;
-          color: #0a0a0a;
-          border: 2px solid black;
-          border-radius: 10px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          border-radius: 8px;
           cursor: pointer;
           transition: background 0.3s ease, transform 0.2s ease;
           margin-top: 10px;
+          width: 100%;
         }
 
         button:hover {
-          background-color: #6a6a6b;
+          background-color: #0056b3;
           transform: translateY(-1px);
         }
 

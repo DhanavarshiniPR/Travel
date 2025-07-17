@@ -1,11 +1,11 @@
-'use client';
+"use client";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import travelBlogs from './lib/traveldata';
 
-export default function TravelBlogPage() {
+const TravelBlogPage=()=> {
   const [adminBlogs, setAdminBlogs] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,9 +56,12 @@ export default function TravelBlogPage() {
             <Link href="/" className="nav-link">Home</Link>
             <Link href="/about" className="nav-link">About</Link>
             <Link href="/contact" className="nav-link">Contact</Link>
+            <Link href="/terms" className="nav-link">Terms and Conditions</Link>
             {isLoggedIn ? (
               <>
-                <Link href="/dashboard" className="nav-link">Dashboard</Link>
+                {localStorage.getItem('role') === 'admin' && (
+                  <Link href="/dashboard" className="nav-link">Dashboard</Link>
+                )}
                 <button onClick={handleLogout} className="btn btn-outline">
                   Logout
                 </button>
@@ -145,39 +148,16 @@ export default function TravelBlogPage() {
           </div>
         </section>
 
-        <section className="cta-section">
-          <div className="cta-container">
-            <div className="cta-content">
-              <h2 className="cta-title">Ready for your next adventure?</h2>
-              <p className="cta-text">
-                Join our community of travel enthusiasts and get exclusive content
-              </p>
-              <div className="cta-actions">
-                {!isLoggedIn ? (
-                  <button 
-                    onClick={handleLogin} 
-                    className="btn btn-primary btn-large"
-                  >
-                    Login to Subscribe
-                  </button>
-                ) : (
-                  <button className="btn btn-secondary btn-large">
-                    Subscribe to Newsletter
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
+      
       </main>
-
      
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-brand">
             <div className="footer-logo">
-              <span className="logo-icon">🌍</span>
+              <span className="logo-icon">~~</span>
               <span className="logo-text">Travel Guides</span>
+              <span className="logo-icon">~~</span>
             </div>
             <p className="footer-description">
               Your trusted source for travel inspiration and expert guides
@@ -226,115 +206,49 @@ export default function TravelBlogPage() {
           </div>
         </div>
       </footer>
+      
    <style jsx>{`
- 
-  :root {
-    --primary-color: #3a86ff;
-    --secondary-color: #8338ec;
-    --accent-color: #ff006e;
-    --dark-color: #1a1a2e;
-    --light-color: #f8f9fa;
-    --gray-color: #6c757d;
-    --border-radius: 8px;
-    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-  }
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
-  }
-
-  body {
-    background-color: #d89595ff;
-    color: #333;
-    line-height: 1.6;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-  }
-
-  .loading-spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top: 4px solid var(--primary-color);
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
   .header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-    transition: background 0.3s ease-in-out;
-    color:black;
+    background-color: #ffffff;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .site-logo {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    transition: color 0.3s ease;
-  }
-
-  .site-logo:hover {
-    color: blue;
+    gap: 0.5rem;
   }
 
   .nav {
     display: flex;
-    align-items: center;
-    gap: 1.8rem;
+    gap: 1.5rem;
   }
 
   .nav-link {
-    position: relative;
+    color: #333;
+    text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
-    color: var(--dark-color);
+    position: relative;
     transition: color 0.3s ease;
   }
 
   .nav-link:hover {
-    color: var(--primary-color);
+    color: #007bff;
   }
 
   .nav-link::after {
@@ -342,10 +256,10 @@ export default function TravelBlogPage() {
     position: absolute;
     left: 0;
     bottom: -4px;
-    width: 0%;
+    width: 0;
     height: 2px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease-in-out;
+    background-color: #007bff;
+    transition: width 0.3s ease;
   }
 
   .nav-link:hover::after {
@@ -353,313 +267,141 @@ export default function TravelBlogPage() {
   }
 
   .btn {
-    padding: 0.45rem 1.2rem;
-    font-size: 0.88rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    border-radius: 999px;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: var(--transition);
-  }
-
-  .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: 0 4px 12px rgba(58, 134, 255, 0.3);
-  }
-
-  .btn-primary:hover {
-    background-color: #2a75e6;
-    transform: translateY(-1px);
+    transition: background-color 0.3s ease;
   }
 
   .btn-outline {
     background-color: transparent;
-    color: var(--primary-color);
-    border: 1.5px solid var(--primary-color);
-    box-shadow: 0 4px 8px rgba(58, 134, 255, 0.1);
+    color: #007bff;
+    border: 1px solid #007bff;
   }
 
   .btn-outline:hover {
-    background-color: rgba(58, 134, 255, 0.1);
+    background-color: #007bff;
+    color: white;
   }
 
-  .btn-large {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+  .page-container {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
   }
 
-  /* =======================
-     Hero Section
-  ======================= */
   .hero-section {
     position: relative;
-    min-height: 500px;
+    height: 500px;
+    background-color: #e9ecef;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: white;
-    overflow: hidden;
-  }
-
-  .hero-image-container {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
   }
 
   .hero-image {
     object-fit: cover;
-    filter: blur(2px);
-    transform: scale(1.02);
     width: 100%;
     height: 100%;
+    filter: brightness(0.7);
   }
 
   .hero-overlay {
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .hero-content {
     position: relative;
-    z-index: 1;
-    max-width: 800px;
-    padding: 2rem;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    text-align: center;
+    color: white;
   }
 
-  /* =======================
-     Card Grid
-  ======================= */
+  .hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
   .section {
-    padding: 3rem 2rem;
-    background-color: #fdfdfd;
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+    color: #666;
   }
 
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    padding: 2rem;
   }
 
   .card-wrapper {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
   }
 
   .card-wrapper:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 
   .card {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    display: block;
     text-decoration: none;
-    height: 100%;
+    color: inherit;
   }
 
   .card-image-wrapper {
     position: relative;
-    width: 100%;
-    aspect-ratio: 4/3;
-    overflow: hidden;
-  }
-
-  .card-image {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.4s ease;
-  }
-
-  .card:hover .card-image {
-    transform: scale(1.05);
-  }
-
-  .card-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: var(--accent-color);
-    color: #fff;
-    padding: 0.3rem 0.8rem;
-    font-size: 0.75rem;
-    font-weight: bold;
-    border-radius: 12px;
-    z-index: 1;
-  }
-
-  .card-content {
-    padding: 1rem 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
+    height: 200px;
   }
 
   .card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--dark-color);
+    font-size: 1.25rem;
+    margin: 1rem;
   }
 
   .card-excerpt {
     font-size: 0.9rem;
+    margin: 0 1rem 1rem;
     color: #555;
-    margin-bottom: 1rem;
-    line-height: 1.4;
   }
 
-  .card-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: var(--gray-color);
-  }
-
-  /* =======================
-     CTA Section
-  ======================= */
-  .cta-section {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    padding: 4rem 2rem;
-    color: white;
-    text-align: center;
-  }
-
-  .cta-container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .cta-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .cta-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .btn-primary {
-    background-color: white;
-    color: var(--primary-color);
-    border: 2px solid white;
-  }
-
-  .btn-primary:hover {
-    background-color: transparent;
-    color: white;
-  }
-
-  .btn-secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
-  .btn-secondary:hover {
-    background-color: white;
-    color: var(--primary-color);
-  }
-
-  /* =======================
-     Footer
-  ======================= */
   .footer {
-    background-color: #2d3748;
+    background-color: #343a40;
     color: #ffffff;
-    margin-top: 4rem;
-    width: 100%;
+    padding: 2rem 0;
   }
 
   .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 3rem 2rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-  }
-
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-  }
-
-  .footer-description {
-    color: #a0aec0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .footer-links-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .link-group {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .link-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-  }
-
-  .link-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .footer-link {
-    color: #a0aec0;
-    font-size: 0.9rem;
-    transition: color 0.2s ease;
-  }
-
-  .footer-link:hover {
-    color: #ffffff;
-    text-decoration: underline;
-  }
-
-  .footer-bottom {
-    background-color: #1a202c;
-    padding: 1.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .footer-bottom-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -668,85 +410,44 @@ export default function TravelBlogPage() {
     align-items: center;
   }
 
-  .copyright {
-    color: #a0aec0;
-    font-size: 0.85rem;
-  }
-
-  .footer-legal {
+  .footer-links {
     display: flex;
     gap: 1.5rem;
   }
 
-  .legal-link {
-    color: #a0aec0;
-    font-size: 0.85rem;
-    transition: color 0.2s ease;
+  .footer-link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
   }
 
-  .legal-link:hover {
-    color: #ffffff;
+  .footer-link:hover {
     text-decoration: underline;
   }
 
-  /* =======================
-     Responsive Design
-  ======================= */
   @media (max-width: 768px) {
-    .nav {
-      gap: 1rem;
-    }
-
-    .btn {
-      font-size: 0.8rem;
-      padding: 0.4rem 1rem;
-    }
-
-    .nav-link {
-      font-size: 0.85rem;
-    }
-
-    .hero-section {
-      min-height: 400px;
-    }
-
-    .hero-content {
-      padding: 1.5rem;
-    }
-
-    .cta-actions {
-      flex-direction: column;
-    }
-
-    .footer-container {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .footer-links-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-links-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .footer-bottom-container {
+    .header-container {
       flex-direction: column;
       gap: 1rem;
-      text-align: center;
     }
 
-    .footer-legal {
-      flex-direction: column;
-      gap: 0.5rem;
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
     }
   }
 `}</style>
-
     </div>
+  
   );
+  
 }
 
+export default TravelBlogPage;

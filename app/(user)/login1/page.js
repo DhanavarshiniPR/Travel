@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from 'react';
 
 export default function UserLoginPage() {
@@ -13,7 +13,7 @@ export default function UserLoginPage() {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('role', 'user');
       setTimeout(() => {
-        window.location.href = '/home1';
+        window.location.href = '/';
       }, 100);
     } else {
       setError('Invalid user credentials');
@@ -54,11 +54,11 @@ export default function UserLoginPage() {
           display: flex;
           justify-content: center;
           align-items: center;
-          background: #d7dbecff;
+          background: #f0f2f5;
         }
 
         .container {
-          background: #ece8f5ff;
+          background: #ffffff;
           padding: 40px;
           border-radius: 12px;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -66,33 +66,47 @@ export default function UserLoginPage() {
           width: 300px;
         }
 
+        h2 {
+          margin-bottom: 20px;
+          font-size: 1.5rem;
+          color: #333;
+        }
+
         input {
           width: 100%;
-          padding: 10px;
+          padding: 12px 14px;
           margin-top: 10px;
-          border-radius: 6px;
+          border-radius: 8px;
           border: 1px solid #ccc;
           font-size: 14px;
+          transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
         }
 
         button {
-          background-color: #707174ff;
+          background-color: #007bff;
           color: white;
           border: none;
-          padding: 10px 20px;
-          border-radius: 6px;
+          padding: 12px 24px;
+          border-radius: 8px;
           font-size: 16px;
           cursor: pointer;
           width: 100%;
+          transition: background-color 0.3s ease;
         }
 
         button:hover {
-          background-color: #858688ff;
+          background-color: #0056b3;
         }
 
         .error {
           margin-top: 10px;
-          color: red;
+          color: #d93025;
           font-size: 14px;
         }
       `}</style>

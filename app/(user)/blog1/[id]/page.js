@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import travelBlogs from '../../../lib/traveldata';
-import '../../../globals.css';
+
 
 export default function BlogDetails() {
   const { id } = useParams();
@@ -52,7 +52,7 @@ export default function BlogDetails() {
   return (
     <main className="blog-details-wrapper">
       <div className="detail-container">
-        {/* Blog image and title */}
+      
         <div className="blog-header">
           {blog.image && (
             <Image
@@ -87,8 +87,6 @@ export default function BlogDetails() {
             <p>{blog.travelInfo}</p>
           </section>
         )}
-
-        {/* Booking section for both types */}
         <section className="section">
           <h2>📅 Book Your Tour</h2>
           <form className="booking-form" onSubmit={handleBooking}>

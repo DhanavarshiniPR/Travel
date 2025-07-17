@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -11,7 +11,6 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
     setTimeout(() => {
       setForm({ name: '', email: '', message: '' });
@@ -22,7 +21,7 @@ export default function ContactPage() {
   return (
     <main className="contact-wrapper">
       <div className="container">
-        <h1>📩 Contact Us</h1>
+        <h1> Contact Us</h1>
         <p className="intro">
           Have questions, feedback, or collaboration ideas? We'd love to hear from you!
         </p>
@@ -56,7 +55,7 @@ export default function ContactPage() {
           />
 
           <button type="submit">Send Message</button>
-          {submitted && <p className="success">✅ Message sent successfully!</p>}
+          {submitted && <p className="success">Message sent successfully!</p>}
         </form>
       </div>
 

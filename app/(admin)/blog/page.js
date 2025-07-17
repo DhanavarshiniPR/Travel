@@ -1,8 +1,8 @@
-'use client';
+"use client";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import '../../globals.css';
+
 
 export default function BlogUserPage() {
   const [blogs, setBlogs] = useState([]);
@@ -30,7 +30,8 @@ export default function BlogUserPage() {
                   className="blog-image"
                 />
                 <h3>{b.title}</h3>
-                <p className="snippet">{b.content.slice(0, 80)}...</p>
+              <p className="snippet">{b.content?.slice(0, 80) || 'No content available...'}</p>
+
                 <Link href={`/blog1/${b.id}`} className="read-link">
                   CLICK FOR MORE
                 </Link>

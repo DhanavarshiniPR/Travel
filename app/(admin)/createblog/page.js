@@ -1,6 +1,7 @@
-'use client';
+"use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import travelBlogs from '../../lib/traveldata'; 
 
 export default function CreateBlog() {
   const [title, setTitle] = useState('');
@@ -18,6 +19,16 @@ export default function CreateBlog() {
       router.push('/loginn');
     }
     setRole(storedRole);
+
+    const existingBlogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+    if (existingBlogs.length === 0) {
+      // Prefix IDs of travelBlogs with 'static-' to avoid duplicate keys
+      const updatedTravelBlogs = travelBlogs.map((blog, index) => ({
+        ...blog,
+        id: `static-${index + 1}`,
+      }));
+      localStorage.setItem('blogs', JSON.stringify(updatedTravelBlogs));
+    }
   }, []);
 
   const handleImageChange = (e) => {
@@ -35,8 +46,13 @@ export default function CreateBlog() {
     e.preventDefault();
 
     const blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+    let newId = `user-${Date.now()}`;
+    if (blogs.some((b) => b.id === newId)) {
+      newId += '-' + Math.random().toString(36).substring(2, 6);
+    }
+
     const newBlog = {
-      id: Date.now().toString(),
+      id: newId,
       title,
       content,
       image,
@@ -48,7 +64,7 @@ export default function CreateBlog() {
     blogs.push(newBlog);
     localStorage.setItem('blogs', JSON.stringify(blogs));
 
-    setSuccess('✅ Blog created successfully!');
+    setSuccess('Blog created successfully!');
     setTitle('');
     setContent('');
     setImage(null);

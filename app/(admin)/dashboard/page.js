@@ -1,40 +1,65 @@
-'use client';
-import { useEffect } from 'react';
+"use client";
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import travelBlogs from '../../lib/traveldata';
 
 const Dashboard = () => {
- 
+  const router = useRouter();
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    setBlogs(travelBlogs);
+  }, []);
+
+  const handleEdit = (id) => {
+    router.push(`/updateblog/${id}`);
+  };
+
+  const handleView = (id) => {
+    router.push(`/blog1/${id}`); // Route to view blog details (make this page if not exists)
+  };
 
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1>Welcome, Admin 👋</h1>
-        <p>Here’s an overview of your platform and recent activities.</p>
+        <h1>Welcome, Admin</h1>
+        <p>Here’s an overview of your travel blog platform.</p>
       </div>
 
-      <div className="dashboard-widgets">
-        <div className="widget-box users">
-          <h3>Total Users</h3>
-          <p>1,245</p>
-        </div>
-        <div className="widget-box posts">
-          <h3>Published Posts</h3>
-          <p>87</p>
-        </div>
-        <div className="widget-box visits">
-          <h3>Site Visits</h3>
-          <p>42,378</p>
-        </div>
-        <div className="widget-box feedback">
-          <h3>User Feedback</h3>
-          <p>326</p>
-        </div>
+      <div className="dashboard-table">
+        <h2>Manage Travel Blogs</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Blog Name</th>
+              <th>Price Range</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {blogs.map((blog) => (
+              <tr key={blog.id}>
+                <td>{blog.id}</td>
+                <td>{blog.name}</td>
+                <td>{blog.bookingInfo?.priceRange || "N/A"}</td>
+                <td>Not specified</td>
+                <td>
+                  <button onClick={() => handleEdit(blog.id)}>Edit</button>
+                  <button className="view" onClick={() => handleView(blog.id)}>View</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="dashboard-links">
-        <Link href="/setting" className="dash-link">⚙️ Settings</Link>
-        <Link href="/about" className="dash-link">📖 About</Link>
-        <Link href="/loginn" className="dash-link logout">🚪 Logout</Link>
+        <Link href="/setting" className="dash-link">Settings</Link>
+        <Link href="/about" className="dash-link">About</Link>
+        <Link href="/loginn" className="dash-link logout">Logout</Link>
       </div>
 
       <style jsx>{`
@@ -46,8 +71,7 @@ const Dashboard = () => {
         }
 
         .dashboard-header h1 {
-          font-size: 2rem;
-          margin-bottom: 0.5rem;
+          font-size: 2.5rem;
           color: #1a202c;
         }
 
@@ -56,39 +80,48 @@ const Dashboard = () => {
           margin-bottom: 2rem;
         }
 
-        .dashboard-widgets {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1.5rem;
-          margin-bottom: 2rem;
+        .dashboard-table h2 {
+          margin-top: 2rem;
+          font-size: 1.8rem;
         }
 
-        .widget-box {
-          background-color: white;
-          padding: 1.5rem;
-          border-radius: 10px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-          text-align: center;
-          transition: transform 0.3s ease;
+        table {
+          width: 100%;
+          margin-top: 1rem;
+          border-collapse: collapse;
         }
 
-        .widget-box:hover {
-          transform: translateY(-5px);
+        th, td {
+          padding: 0.75rem;
+          text-align: left;
+          border-bottom: 1px solid #e2e8f0;
         }
 
-        .widget-box h3 {
-          font-size: 1rem;
-          color: #718096;
-          margin-bottom: 0.5rem;
+        th {
+          background-color: #edf2f7;
+          font-weight: 600;
         }
 
-        .widget-box p {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #2d3748;
+        td button {
+          margin-right: 0.5rem;
+          background-color: #3182ce;
+          color: white;
+          padding: 0.4rem 0.8rem;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        td button.view {
+          background-color: #38a169;
+        }
+
+        td button:hover {
+          opacity: 0.9;
         }
 
         .dashboard-links {
+          margin-top: 2rem;
           display: flex;
           gap: 1rem;
           flex-wrap: wrap;
@@ -117,9 +150,33 @@ const Dashboard = () => {
         }
 
         @media (max-width: 600px) {
-          .widget-box p {
-            font-size: 1.2rem;
+          table, thead, tbody, th, td, tr {
+            display: block;
           }
+
+          tr {
+            margin-bottom: 1rem;
+          }
+
+          td {
+            position: relative;
+            padding-left: 50%;
+          }
+
+          td:before {
+            position: absolute;
+            left: 0;
+            width: 45%;
+            padding-left: 1rem;
+            font-weight: bold;
+            color: #4a5568;
+          }
+
+          td:nth-of-type(1):before { content: "ID"; }
+          td:nth-of-type(2):before { content: "Blog Name"; }
+          td:nth-of-type(3):before { content: "Price Range"; }
+          td:nth-of-type(4):before { content: "Date"; }
+          td:nth-of-type(5):before { content: "Actions"; }
         }
       `}</style>
     </div>
