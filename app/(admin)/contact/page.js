@@ -22,9 +22,10 @@ export default function ContactPage() {
     <main className="contact-wrapper">
       <div className="container">
         <h1> Contact Us</h1>
-        <p className="intro">
-          Have questions, feedback, or collaboration ideas? We'd love to hear from you!
-        </p>
+       <p className="intro">
+  Have questions, feedback, or collaboration ideas? We&apos;d love to hear from you!
+</p>
+
 
         <form onSubmit={handleSubmit} className="contact-form">
           <input

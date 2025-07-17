@@ -72,7 +72,7 @@ export default function BlogDetails() {
 
         {blog.facts && (
           <section className="section">
-            <h2>🌟 Fascinating Facts</h2>
+            <h2>Fascinating Facts</h2>
             <ul className="fact-list">
               {blog.facts.map((fact, index) => (
                 <li key={index}>{fact}</li>
@@ -83,12 +83,12 @@ export default function BlogDetails() {
 
         {blog.travelInfo && (
           <section className="section">
-            <h2>🧳 Travel Information</h2>
+            <h2>Travel Information</h2>
             <p>{blog.travelInfo}</p>
           </section>
         )}
         <section className="section">
-          <h2>📅 Book Your Tour</h2>
+          <h2> Book Your Tour</h2>
           <form className="booking-form" onSubmit={handleBooking}>
             <input
               type="text"
@@ -126,7 +126,7 @@ export default function BlogDetails() {
           </form>
         </section>
 
-        <a href="/" className="back-button">← Back to Blog Home</a>
+        <Link href="/" className="back-button">← Back to Blog Home</Link>
       </div>
 
       <style jsx>{`
