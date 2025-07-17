@@ -26,7 +26,7 @@ export default function AdminHome() {
           <div className="nav-links">
             <Link href="/dashboard" className="nav-link">Dashboard</Link>
             <Link href="/settings" className="nav-link">Settings</Link>
-            <a href="#" onClick={() => { localStorage.clear(); window.location.href = '/loginn'; }} className="logout-button">Logout</a>
+            <Link href="#" onClick={() => { localStorage.clear(); window.location.href = '/loginn'; }} className="logout-button">Logout</Link>
           </div>
         </div>
       </nav>

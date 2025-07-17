@@ -17,14 +17,14 @@ const Dashboard = () => {
   };
 
   const handleView = (id) => {
-    router.push(`/blog1/${id}`); // Route to view blog details (make this page if not exists)
+    router.push(`/blog1/${id}`);
   };
 
   return (
     <div className="dashboard">
       <div className="dashboard-header">
         <h1>Welcome, Admin</h1>
-        <p>Here’s an overview of your travel blog platform.</p>
+        <p>Here is an overview of your travel blog platform.</p>
       </div>
 
       <div className="dashboard-table">

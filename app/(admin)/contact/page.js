@@ -56,7 +56,7 @@ export default function ContactPage() {
           />
 
           <button type="submit">Send Message</button>
-          {submitted && <p className="success">Message sent successfully!</p>}
+          {submitted && <p className="success">Message sent successfully</p>}
         </form>
       </div>
 

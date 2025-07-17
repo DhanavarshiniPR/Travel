@@ -22,7 +22,7 @@ export default function CreateBlog() {
 
     const existingBlogs = JSON.parse(localStorage.getItem('blogs') || '[]');
     if (existingBlogs.length === 0) {
-      // Prefix IDs of travelBlogs with 'static-' to avoid duplicate keys
+     
       const updatedTravelBlogs = travelBlogs.map((blog, index) => ({
         ...blog,
         id: `static-${index + 1}`,
